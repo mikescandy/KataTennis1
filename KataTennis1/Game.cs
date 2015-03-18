@@ -8,22 +8,20 @@ namespace KataTennis1
 {
     public class Game
     {
-        public Game()
+        public Player1 Player1 { get; set; }
+        public Player2 Player2 { get; set; }
+
+        public Game(IPlayer player1, IPlayer player2)
         {
-            Player1 = new Player(1);
-            Player2 = new Player(2);
+            Player1 = player1;
+            Player2 = player2;
             GameEnd = false;
         }
+
         public bool GameEnd { get; set; }
-        public Player Player1 { get; set; }
-        public Player Player2 { get; set; }
-        public Player Winner { get; private set; }
-        private int activePlayer = 1;
-        public Player ActivePlayer { get { return activePlayer == 1 ? Player1 : Player2; } }
-        public void NextPlayer()
-        {
-            activePlayer = (activePlayer++) % 2;
-        }
+      
+        public IPlayer Winner { get; private set; }
+ 
         public string Score()
         {
             if (Player1.Points == Player2.Points && Player1.Points >= 3)
@@ -44,27 +42,15 @@ namespace KataTennis1
             }
 
         }
-        public void Point(int playerN)
+        public void Point(IPlayer player)
         {
-            if (playerN == 1)
-                Player1.Score();
-            else Player2.Score();
+            player.Score;
             Update();
         }
 
         private void Update()
         {
-            if (Player1.Points >= 4 && Player1.Points - Player2.Points >= 2)
-            {
-                GameEnd = true;
-                Winner = Player1;
-            }
-            else if (Player2.Points >= 4 && Player2.Points - Player1.Points >= 2)
-            {
-                GameEnd = true;
-                Winner = Player2;
-            }
+           
         }
-
     }
 }

@@ -6,19 +6,35 @@ using System.Threading.Tasks;
 
 namespace KataTennis1
 {
-    public class Player
+     public interface IPlayer
     {
-        public int PlayerNumber { get; set; }
-        public Player(int number)
+        int Points { get; set; }
+        void Score();
+    }
+
+    public abstract class Player:IPlayer
+    {
+         
+        public Player()
         {
-            Points=0;
-            PlayerNumber=number;
+            Points = 0;
+           
         }
         public int Points { get; set; }
         public void Score()
         {
             Points++;
         }
-       
+
+    }
+
+    public sealed class Player1 : Player
+    {
+
+    }
+
+    public sealed class Player2 : Player
+    {
+
     }
 }
